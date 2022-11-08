@@ -5,11 +5,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.youngWorker.entities.Estudiante;
+import pe.edu.upc.youngWorker.entities.Plan;
 
 import java.util.List;
 
 @Repository
 public interface IEstudianteRepository extends JpaRepository<Estudiante,Integer> {
-    @Query("from Estudiante e "+ "where e.nombreEstudiante like %:nombreEstudiante")
-    List<Estudiante> buscarNameEstudiante(@Param("nombreEstudiante") String nombreEstudiante);
+
+    @Query("from Estudiante e where e.usuario.nameUsuario like %:nombreUsuario%")
+    List<Estudiante> buscarUsuario(@Param("nombreUsuario") String nombreUsuario);
+
+    @Query("from Estudiante e where e.nombreEstudiante like %:nombreEstudiante%")
+    List<Estudiante> buscarEstudiante(@Param("nombreEstudiante") String nombreEstudiante);
+
 }
